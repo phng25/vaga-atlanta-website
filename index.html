@@ -6,68 +6,102 @@
   <title>Atlanta VGA</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<script>
-  // Highlight current nav link
-  const links = document.querySelectorAll("nav a");
-  links.forEach(link => {
-    if (window.location.pathname.endsWith(link.getAttribute("href"))) {
-      link.classList.add("active");
-    }
-  });
-</script>
 <body>
-  <header>
-    <h1>Vietnamese Golf Association of Atlanta</h1>
-    <nav aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="schedule.html">Schedule</a>
-      <a href="results.html">Results</a>
-    </nav>
-  </header>
+<header>
+  <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+    <img src="vga.png" alt="VGA Atlanta Logo" style="height: 60px; width: auto;">
+    <h1 style="margin: 0;">Vietnamese Golf Association of Atlanta</h1>
+  </div>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="results.html">Results</a>
+  </nav>
+</header>
 
-  <main>
-    <section id="home" class="hero">
-      <img src="golf-banner.jpg" alt="A scenic golf course banner" class="hero-img" />
-      <h2>Tracking golf scores to support our mission</h2>
-    </section>
+<main>
+  <section class="hero">
+    <h2>Welcome to the Vietnamese Golf Association of Atlanta</h2>
+    <p class="hero-subtext">
+      Building community through golf — connecting Vietnamese players across Georgia.
+    </p>
+  </section>
 
-    <section class="welcome">
-      <h2>Welcome to Our Golf Score Tracking Website</h2>
-      <p>Track golf scores from your events. Submit a round or view recent results.</p>
-    </section>
+  <section class="schedule">
+    <h2 style="text-align: center;">Upcoming Tournament Schedule</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Tournament</th>
+          <th>Location</th>
+          <th>Registration</th>
+        </tr>
+      </thead>
+      <tbody id="schedule-body">
+        <!-- Populated via JS -->
+      </tbody>
+    </table>
+  </section>
 
-    <section class="scores">
-      <h2>Recent Golf Scores</h2>
-      <table>
-        <thead>
-          <tr><th>Player</th><th>Score</th><th>Course</th><th>Date</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>John Smith</td><td>72</td><td>Oakwood G.C.</td><td>April 6, 2024</td></tr>
-          <tr><td>Emily Johnson</td><td>75</td><td>Pinehurst Resort</td><td>April 8, 2024</td></tr>
-          <tr><td>Michael Brown</td><td>70</td><td>Pebble Beach</td><td>April 6, 2024</td></tr>
-          <tr><td>Sarah Davis</td><td>78</td><td>Torrey Pines</td><td>April 4, 2024</td></tr>
-        </tbody>
-      </table>
-    </section>
+  <section class="scores">
+    <h2 style="text-align: center;">Recent Tournament Results</h2>
+    <table id="recent-results-table" style="display: none;">
+      <thead id="recent-results-head"></thead>
+      <tbody id="recent-results-body"></tbody>
+    </table>
+  </section>
+</main>
 
-    <section class="actions">
-      <div class="card">
-        <h3>Submit a Score</h3>
-        <p>Submit your golf scores via our online form.</p>
-        <a href="submit.html" class="button">Submit Score</a>
-      </div>
-      <div class="card">
-        <h3>View Leaderboard</h3>
-        <p>Check the leaderboard to see top players.</p>
-        <a href="results.html" class="button">View Leaderboard</a>
-      </div>
-    </section>
-  </main>
+<footer>
+  <p>&copy; 2025 Vietnamese Golf Association of Atlanta. All rights reserved.</p>
+</footer>
 
-  <footer>
-    <p>&copy; 2025 Vietnamese Golf Association of Atlanta. All rights reserved.</p>
-  </footer>
+<script>
+  // Load schedule
+  fetch('schedule.json')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById('schedule-body');
+      data.forEach(event => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${event.date}</td>
+          <td>${event.name}</td>
+          <td>${event.location}</td>
+          <td><a href="${event.registration_link || '#'}">${event.registration}</a></td>
+        `;
+        tbody.appendChild(row);
+      });
+    })
+    .catch(() => {
+      document.getElementById('schedule-body').innerHTML = `<tr><td colspan="4">Unable to load schedule.</td></tr>`;
+    });
+
+  // Load most recent results
+  const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQs5r7lurqtVukfcLbKr2W6w1_zpqdplc21K898moWXLGkHZbcLKPmpapsi8PF9VS30TkKj9r0zXO8/pub?output=csv";
+  const table = document.getElementById("recent-results-table");
+  const thead = document.getElementById("recent-results-head");
+  const tbody = document.getElementById("recent-results-body");
+
+  fetch(sheetUrl)
+    .then(res => res.text())
+    .then(csv => {
+      const lines = csv.trim().split('\n');
+      const headers = lines[0].split(',');
+      const rows = lines.slice(1);
+      thead.innerHTML = "<tr>" + headers.map(h => `<th>${h.trim()}</th>`).join('') + "</tr>";
+      tbody.innerHTML = rows.map(row => {
+        const cols = row.split(',');
+        return "<tr>" + cols.map(c => `<td>${c.trim()}</td>`).join('') + "</tr>";
+      }).join('');
+      table.style.display = "table";
+    })
+    .catch(() => {
+      thead.innerHTML = "";
+      tbody.innerHTML = `<tr><td colspan="10">Error loading scores.</td></tr>`;
+      table.style.display = "table";
+    });
+</script>
 </body>
 </html>

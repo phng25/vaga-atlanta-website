@@ -5,60 +5,99 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Atlanta VGA - Tournament Schedule</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .expandable {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .expandable:hover {
+      background-color: #f0f0f0;
+    }
+    .details-row {
+      display: none;
+      background-color: #fafafa;
+    }
+    .details-row td {
+      padding: 1rem;
+      font-style: italic;
+      color: #444;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Vietnamese Golf Association of Atlanta</h1>
-    <h2>2025 Tournament Schedule</h2>
+  <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+    <img src="vga.png" alt="VGA Atlanta Logo" style="height: 60px; width: auto;">
+    <h1 style="margin: 0;">Vietnamese Golf Association of Atlanta</h1>
+  </div>
     <nav>
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="schedule.html">Schedule</a>
+      <!-- <a href="about.html">About</a> -->
+      <a href="schedule.html" class="active">Schedule</a>
       <a href="results.html">Results</a>
     </nav>
   </header>
 
   <main>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Tournament</th>
-          <th>Location</th>
-          <th>Registration</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>March 15, 2025</td>
-          <td>Spring Kickoff Classic</td>
-          <td>Stone Mountain Golf Club</td>
-          <td><a href="#">Open</a></td>
-        </tr>
-        <tr>
-          <td>May 10, 2025</td>
-          <td>Atlanta Invitational</td>
-          <td>Château Élan</td>
-          <td><a href="#">Open</a></td>
-        </tr>
-        <tr>
-          <td>July 20, 2025</td>
-          <td>Summer Open</td>
-          <td>Braelin Golf Club</td>
-          <td><a href="#">Coming Soon</a></td>
-        </tr>
-        <tr>
-          <td>October 5, 2025</td>
-          <td>Fall Finale</td>
-          <td>Heritage Golf Links</td>
-          <td><a href="#">Coming Soon</a></td>
-        </tr>
-      </tbody>
-    </table>
+    <section>
+      <h2 style="text-align: center;">2025 Tournament Schedule</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Tournament</th>
+            <th>Location</th>
+            <th>Registration</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-body">
+          <!-- Populated via JavaScript -->
+        </tbody>
+      </table>
+    </section>
   </main>
 
   <footer>
-    <p>© 2025 Vietnamese Golf Association of Atlanta</p>
+    <p>&copy; 2025 Vietnamese Golf Association of Atlanta. All rights reserved.</p>
   </footer>
+
+  <script>
+    fetch('schedule.json')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('schedule-body');
+        data.forEach((event) => {
+          const row = document.createElement('tr');
+          row.className = "expandable";
+          row.innerHTML = `
+            <td>${event.date}</td>
+            <td>${event.name}</td>
+            <td>${event.location}</td>
+            <td><a href="${event.registration_link || '#'}">${event.registration}</a></td>
+          `;
+
+          const detailRow = document.createElement('tr');
+          detailRow.className = "details-row";
+          detailRow.innerHTML = `
+            <td colspan="4">
+              <strong>Format:</strong> ${event.format || "TBD"}<br/>
+              <strong>Tee Times:</strong> ${event.tee_times || "TBD"}<br/>
+              <strong>Notes:</strong> ${event.notes || "No additional details."}
+            </td>
+          `;
+
+          row.addEventListener('click', () => {
+            detailRow.style.display = detailRow.style.display === 'table-row' ? 'none' : 'table-row';
+          });
+
+          tbody.appendChild(row);
+          tbody.appendChild(detailRow);
+        });
+      })
+      .catch(err => {
+        console.error("Failed to load schedule:", err);
+        document.getElementById('schedule-body').innerHTML = `<tr><td colspan="4">Unable to load schedule.</td></tr>`;
+      });
+  </script>
 </body>
 </html>

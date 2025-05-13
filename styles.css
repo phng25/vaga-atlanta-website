@@ -1,130 +1,57 @@
-/* styles.css */
+/* Modernized styles.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f8f9f4;
+  background-color: #f4f6f8;
   color: #333;
   line-height: 1.6;
 }
 
 header {
-  background-color: #2f5d3f;
+  background-color: #1f3d2e;
   color: white;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 nav {
   margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 nav a {
   color: #ffffff;
-  margin: 0 0.75rem;
   text-decoration: none;
-  font-weight: 500;
-}
-
-.hero {
-  text-align: center;
-  padding: 1rem;
-  background-color: #e3ede1;
-}
-
-.hero-img {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-bottom: 3px solid #2f5d3f;
-}
-
-section {
-  padding: 2rem 1.5rem;
-}
-
-h2 {
-  color: white;
-  margin-bottom: 1rem;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-table th, table td {
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-table th {
-  background-color: #4c7a5b;
-  color: white;
-}
-
-.card {
-  background-color: white;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.button {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: #4c7a5b;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-top: 0.5rem;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #3c614c;
-}
-
-footer {
-  background-color: #2f5d3f;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-}
-
-nav a {
-  color: #ffffff;
-  margin: 0 0.75rem;
-  text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   position: relative;
   padding-bottom: 0.25rem;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #a9e6c9;
+  color: #a0f0c0;
 }
 
-/* Underline on hover */
 nav a::after {
   content: "";
   position: absolute;
   width: 100%;
   height: 2px;
-  background-color: #a9e6c9;
+  background-color: #a0f0c0;
   bottom: 0;
   left: 0;
   transform: scaleX(0);
@@ -132,14 +59,172 @@ nav a::after {
   transform-origin: right;
 }
 
-nav a:hover::after {
+nav a:hover::after,
+nav a.active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* Active/current page underline */
-nav a.active::after {
-  transform: scaleX(1);
-  background-color: #ffffff;
-  transform-origin: left;
+.hero {
+  text-align: center;
+  background-color: #e9f1eb;
+  padding: 2rem 1rem;
+}
+
+.hero-img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-bottom: 4px solid #1f3d2e;
+  border-radius: 0.5rem;
+}
+
+main {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+h2 {
+  color: #1f3d2e;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+table th, table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+table th {
+  background-color: #2e6248;
+  color: white;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  margin: 1rem 0;
+}
+
+.button {
+  display: inline-block;
+  background-color: #2e6248;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: #24503a;
+}
+
+footer {
+  background-color: #1f3d2e;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.hero {
+  text-align: center;
+  background-color: #e9f1eb;
+  padding: 3rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.hero-subtext {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 600px;
+  margin: 1rem auto 0;
+}
+
+
+header img {
+  height: 60px;
+  width: auto;
+  vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  header img {
+    height: 50px;
+  }
+
+  header h1 {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+}
+
+
+table {
+  width: 95%;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+}
+
+th {
+  background-color: #1f4037;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+td:first-child, th:first-child {
+  text-align: center;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+@media screen and (max-width: 1024px) {
+  table {
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    padding: 0.5rem;
+  }
 }
