@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atlanta VGA - Results</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    select {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    table {
+      width: 90%;
+      max-width: 800px;
+      margin: 2rem auto;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background-color: #007b5e;
+      color: white;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -17,23 +41,63 @@
     </nav>
   </header>
 
-  <main>
-    <h2>Top Golf Scores</h2>
-    <table>
-      <thead>
-        <tr><th>Rank</th><th>Player</th><th>Score</th><th>Course</th><th>Date</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Michael Brown</td><td>70</td><td>Pebble Beach</td><td>April 6, 2024</td></tr>
-        <tr><td>2</td><td>John Smith</td><td>72</td><td>Oakwood G.C.</td><td>April 6, 2024</td></tr>
-        <tr><td>3</td><td>Emily Johnson</td><td>75</td><td>Pinehurst Resort</td><td>April 8, 2024</td></tr>
-        <tr><td>4</td><td>Sarah Davis</td><td>78</td><td>Torrey Pines</td><td>April 4, 2024</td></tr>
-      </tbody>
-    </table>
-  </main>
+ <main>
+  <h2>Top Golf Scores</h2>
+  <label for="tournamentSelect" style="text-align:center; display:block;">Select a tournament:</label>
+  <select id="tournamentSelect">
+    <option value="">-- Choose Tournament --</option>
+    <option value="https://docs.google.com/spreadsheets/d/e/2PACX-1vSQs5r7lurqtVukfcLbKr2W6w1_zpqdplc21K898moWXLGkHZbcLKPmpapsi8PF9VS30TkKj9r0zXO8/pub?output=csv">May 2025 Classic</option>
+  </select>
 
-  <footer>
-    <p>&copy; 2025 Non-Profit Golf Score Tracker. All rights reserved.</p>
-  </footer>
+  <table id="scoreTable" style="display:none;">
+    <thead id="tableHead"></thead>
+    <tbody id="leaderboardBody"></tbody>
+  </table>
+</main>
+
+<script>
+  const select = document.getElementById("tournamentSelect");
+  const table = document.getElementById("scoreTable");
+  const thead = document.getElementById("tableHead");
+  const tbody = document.getElementById("leaderboardBody");
+
+  select.addEventListener("change", () => {
+    const sheetUrl = select.value;
+
+    if (!sheetUrl) {
+      table.style.display = "none";
+      tbody.innerHTML = "";
+      thead.innerHTML = "";
+      return;
+    }
+
+    fetch(sheetUrl)
+      .then(response => response.text())
+      .then(csv => {
+        const lines = csv.trim().split('\n');
+        const headers = lines[0].split(',');
+        const rows = lines.slice(1);
+
+        // Render dynamic headers
+        thead.innerHTML = "<tr>" + headers.map(h => `<th>${h.trim()}</th>`).join('') + "</tr>";
+
+        // Render dynamic rows
+        tbody.innerHTML = "";
+        rows.forEach(row => {
+          const cols = row.split(',');
+          const tr = "<tr>" + cols.map(c => `<td>${c.trim()}</td>`).join('') + "</tr>";
+          tbody.innerHTML += tr;
+        });
+
+        table.style.display = "table";
+      })
+      .catch(err => {
+        console.error("Error fetching/parsing CSV:", err);
+        tbody.innerHTML = `<tr><td colspan="21">Error loading scores.</td></tr>`;
+        thead.innerHTML = "";
+        table.style.display = "table";
+      });
+  });
+</script>
 </body>
 </html>
