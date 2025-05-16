@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atlanta VGA - Results</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css">
+  <title>VAGA - Results</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/styles.css">
   <style>
     select {
       display: block;
@@ -34,14 +34,14 @@
 <body>
   <header>
   <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-    <img src="vga.png" alt="VGA Atlanta Logo" style="height: 60px; width: auto;">
-    <h1 style="margin: 0;">Vietnamese Golf Association of Atlanta</h1>
+    <img src="/vaga.png" alt="VGA Atlanta Logo" style="height: 60px; width: auto;">
+    <h1 style="margin: 0;">Vietnamese Atlanta Golfers' Association</h1>
   </div>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="/">Home</a>
       <!-- <a href="about.html">About</a> -->
-      <a href="schedule.html">Schedule</a>
-      <a href="results.html">Results</a>
+      <a href="/schedule/">Schedule</a>
+      <a href="/results/" class="active">Results</a>
     </nav>
   </header>
 
@@ -54,9 +54,13 @@
 
   <table id="scoreTable" style="display:none;">
     <thead id="tableHead"></thead>
-    <tbody id="leaderboardBody"></tbody>
+    <tbody id="leaderboardBody"></tbody> 
   </table>
 </main>
+
+<footer>
+  <p>&copy; 2025 Vietnamese Atlanta Golfers' Association. All rights reserved.</p>
+</footer>
 
 <script>
   const select = document.getElementById("tournamentSelect");

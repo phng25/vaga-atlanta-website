@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Atlanta VGA - Tournament Schedule</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css" />
+  <title>VAGA - Schedule</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico">
+  <link rel="stylesheet" href="/styles.css" />
   <style>
     .expandable {
       cursor: pointer;
@@ -28,14 +29,14 @@
 <body>
   <header>
   <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-    <img src="vga.png" alt="VGA Atlanta Logo" style="height: 60px; width: auto;">
-    <h1 style="margin: 0;">Vietnamese Golf Association of Atlanta</h1>
+    <img src="/vaga.png" alt="VGA Atlanta Logo" style="height: 60px; width: auto;">
+    <h1 style="margin: 0;">Vietnamese Atlanta Golfers' Association</h1>
   </div>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="/">Home</a>
       <!-- <a href="about.html">About</a> -->
-      <a href="schedule.html" class="active">Schedule</a>
-      <a href="results.html">Results</a>
+      <a href="/schedule/" class="active">Schedule</a>
+      <a href="/results/">Results</a>
     </nav>
   </header>
 
@@ -59,11 +60,11 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 Vietnamese Golf Association of Atlanta. All rights reserved.</p>
+    <p>&copy; 2025 Vietnamese Atlanta Golfers' Association. All rights reserved.</p>
   </footer>
 
   <script>
-    fetch('schedule.json')
+    fetch('/schedule.json')
       .then(res => res.json())
       .then(data => {
         const tbody = document.getElementById('schedule-body');
