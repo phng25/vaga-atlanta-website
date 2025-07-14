@@ -1,42 +1,12 @@
 [
   {
-    "date": "March 15, 2025",
-    "name": "Spring Kickoff Classic",
-    "location": "Stone Mountain Golf Club",
-    "registration": "Coming Soon",
-    "registration_link": "#",
+    "date": "August 9, 2025",
+    "name": "BHCC Tournament",
+    "location": "Berkeley Hills Country Club",
+    "registration": "Open - Sign Up Here",
+    "registration_link": "https://forms.gle/6zMrDNArg6zT5wdj6",
     "format": "Individual Stroke Play",
-    "tee_times": "8:00 AM - 10:00 AM",
-    "notes": "Opening ceremony at 7:30 AM. Range balls included."
-  },
-  {
-    "date": "May 10, 2025",
-    "name": "Atlanta Invitational",
-    "location": "Château Élan",
-    "registration": "Coming Soon",
-    "registration_link": "#",
-    "format": "2-Person Best Ball",
-    "tee_times": "9:00 AM Shotgun Start",
-    "notes": "Lunch buffet after the round. Prizes for top 3 teams."
-  },
-  {
-    "date": "July 20, 2025",
-    "name": "Summer Open",
-    "location": "Bear's Best Atlanta",
-    "registration": "Coming Soon",
-    "registration_link": "#",
-    "format": "Scramble",
     "tee_times": "TBD",
-    "notes": "Fun team format event. Family welcome!"
-  },
-  {
-    "date": "October 5, 2025",
-    "name": "Fall Finale",
-    "location": "Heritage Golf Links",
-    "registration": "Coming Soon",
-    "registration_link": "#",
-    "format": "Match Play Championship",
-    "tee_times": "8:30 AM - 9:30 AM",
-    "notes": "End-of-year awards and dinner to follow."
+    "notes": ""
   }
 ]
