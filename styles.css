@@ -143,3 +143,12 @@ footer {
   margin-top: 2rem;
   font-size: 0.9rem;
 }
+
+.results-coming-soon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  text-align: center;
+  font-size: 1.75rem;
+}
