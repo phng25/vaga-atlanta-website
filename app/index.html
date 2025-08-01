@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VAGA - Mobile App</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <style>
+    .app-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .app-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .app-icons a img {
+      height: 60px;
+      transition: transform 0.2s ease;
+    }
+
+    .app-icons a:hover img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <img src="/vaga.png" alt="VGA Atlanta Logo" style="height: 60px; width: auto;">
+      <h1 style="margin: 0;">Vietnamese Atlanta Golfers' Association</h1>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/schedule/">Schedule</a>
+      <a href="/results/">Results</a>
+      <a href="/announcements/">Announcements</a>
+      <a href="/app/" class="active">Mobile App</a>
+    </nav>
+  </header>
+
+  <main class="app-container">
+    <h2>📱 Download the VAGA Atlanta App</h2>
+    <p>Stay connected, get tournament updates, and manage your golf experience — all from your phone!</p>
+
+    <div class="app-icons">
+      <!-- Replace with your actual store URLs -->
+      <a href="https://apps.apple.com/app/atlantavaga/id6749204098" target="_blank" aria-label="Download on the App Store">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+      </a>
+      <a href="https://chicagovga.org/atlantavaga-android-apps" target="_blank" aria-label="Get it on Google Play">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+      </a>
+    </div>
+  </main>
+</body>
+</html>
